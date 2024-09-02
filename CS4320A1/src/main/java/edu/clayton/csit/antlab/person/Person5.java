@@ -1,14 +1,14 @@
 package edu.clayton.csit.antlab.person;
 
 /**
- *  A simple class for person 1
+ *  A simple class for person 5
  *  returns their name and a
  *  modified string 
  *  
  *  @author Qu
  *  @version 1.1
  */
-public class Person1 {
+public class Person5 {
   /** Holds the persons real name */
   private String name;
   	/**
@@ -16,7 +16,7 @@ public class Person1 {
 	 * name
 	 * @param pname the person's real name
 	 */
-  public Person1(String pname) {
+  public Person5(String pname) {
     name = pname;
   }
   	/**
@@ -30,17 +30,8 @@ public class Person1 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-    //Person 1 put your implementation here
-		String result = null;
-	  try{
-		String split1 = input.substring(0,2);
-		String split2 = input.substring(2);
-		result = split2.concat(split1);
-
-	  } catch(Exception e){
-		System.out.println(e);
-	  }
-	  return result;
+	  //Person 5 put your implementation here
+	  return null;
 	}
 	
 	/**
