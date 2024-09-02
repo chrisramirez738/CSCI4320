@@ -30,10 +30,11 @@ public class Person1 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
+		String result = null;
 	  try{
 		String split = input.substring(0,2);
 		String split2 = input.substring(2,(input.length()-1));
-		String result = split2.concat(split);
+		result = split2.concat(split);
 
 	  } catch(Exception e){
 		System.out.println(e);
