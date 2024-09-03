@@ -1,3 +1,3 @@
 Precious Iheanacho
-
-piheanacho100@gmail.com
+CSU email: piheanacho@sudent.clayton.edu
+Email: piheanacho100@gmail.com
