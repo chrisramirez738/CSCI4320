@@ -49,18 +49,4 @@ public class Person2 {
     public String toString(String input) {
         return name + calc(input);
     }
-    
-    public static void main(String[] args) {
-        // Create a new Person2 object
-        Person2 person = new Person2("Jean");
-
-        // Test the toString method with a sample input
-        String input = "gtg123b";
-        String result = person.toString(input);
-
-        // Print out the result
-        System.out.println("Original input: " + input);
-        System.out.println("Modified output: " + result);
-    }
-
 }
