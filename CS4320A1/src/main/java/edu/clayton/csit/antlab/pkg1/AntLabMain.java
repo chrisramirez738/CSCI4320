@@ -59,7 +59,6 @@ import edu.clayton.csit.antlab.pkg2.*;
 		  //and csuLaker1 with your laker id
 		  Person1 p1 = new Person1("Chris Ramirez");
 		  toPrint += p1.toString("900659694");
-
 		  //Person2 replace P2 with your name
 		  //and csuLaker with your laker id
 		  Person2 p2 = new Person2("P2");
