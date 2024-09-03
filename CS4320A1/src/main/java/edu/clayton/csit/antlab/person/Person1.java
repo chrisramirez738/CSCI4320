@@ -30,8 +30,17 @@ public class Person1 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 1 put your implementation here
-	  return null;
+    //Person 1 put your implementation here
+		String result = null;
+	  try{
+		String split1 = input.substring(0,2);
+		String split2 = input.substring(2);
+		result = split2.concat(split1);
+
+	  } catch(Exception e){
+		System.out.println(e);
+	  }
+	  return result;
 	}
 	
 	/**
