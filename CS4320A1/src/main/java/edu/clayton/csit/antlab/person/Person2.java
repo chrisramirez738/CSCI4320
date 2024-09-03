@@ -52,7 +52,7 @@ public class Person2 {
     
     public static void main(String[] args) {
         // Create a new Person2 object
-        Person2 person = new Person2("Qu");
+        Person2 person = new Person2("Jean");
 
         // Test the toString method with a sample input
         String input = "gtg123b";
