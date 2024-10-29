@@ -1,0 +1,250 @@
+To incorporate the requested functionality, I will modify the existing code by adding methods to support new product lines and product additions. The changes involve creating functions to add new product lines to the inventory and insert new products into those lines. Additionally, I will provide an endpoint that allows us to interact with these functionalities.
+Enhancements Overview
+Add New Product Line: Creating a new product line category.
+Add New Products: A method to add products to an existing or newly created product line.
+Suggested Code Enhancements
+Update ProductServiceImpl with New Methods:
+addProductLine: Adds a new product line to the inventory.
+addProductToInventory: Adds a new product to an existing product line.
+Create a New Servlet: To handle requests for adding product lines and products.
+Updated ProductServiceImpl
+Add these new methods to ProductServiceImpl to handle product lines and new product additions.
+
+package com.shashi.service.impl;
+
+import com.shashi.beans.ProductBean;
+import java.util.List;
+
+public class ProductServiceImpl {
+
+    // Method to add a new product line
+    public String addProductLine(String productLineName) {
+        // Logic to add a product line to the inventory
+        // Assuming a method saveProductLine() that adds the product line to the database
+        boolean isAdded = saveProductLine(productLineName);
+        return isAdded ? "Product line added successfully!" : "Failed to add product line.";
+    }
+
+    // Method to add a new product to the inventory under a specific product line
+    public String addProductToInventory(ProductBean product) {
+        // Logic to add the product to an existing product line
+        // Assuming saveProduct() saves the product in the database
+        boolean isAdded = saveProduct(product);
+        return isAdded ? "Product added successfully to inventory!" : "Failed to add product.";
+    }
+
+    private boolean saveProductLine(String productLineName) {
+        // Implement the code to save the product line in the database
+        return true;
+    }
+
+    private boolean saveProduct(ProductBean product) {
+        // Implement the code to save the product in the database
+        return true;
+    }
+}
+
+New Servlet ProductManagementServlet
+This servlet will handle requests to add new product lines and products.
+
+package com.shashi.srv;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.shashi.beans.ProductBean;
+import com.shashi.service.impl.ProductServiceImpl;
+
+@WebServlet("/ProductManagement")
+public class ProductManagementServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private ProductServiceImpl productService = new ProductServiceImpl();
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        PrintWriter pw = response.getWriter();
+        response.setContentType("text/html");
+
+        if ("addProductLine".equalsIgnoreCase(action)) {
+            String productLineName = request.getParameter("productLineName");
+            String status = productService.addProductLine(productLineName);
+            pw.println("<script>document.getElementById('message').innerHTML='" + status + "'</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
+            rd.include(request, response);
+
+        } else if ("addProduct".equalsIgnoreCase(action)) {
+            String prodName = request.getParameter("prodName");
+            String prodLine = request.getParameter("prodLine");
+            double prodPrice = Double.parseDouble(request.getParameter("prodPrice"));
+            int prodQuantity = Integer.parseInt(request.getParameter("prodQuantity"));
+
+            ProductBean newProduct = new ProductBean();
+            newProduct.setProdName(prodName);
+            newProduct.setProdLine(prodLine);
+            newProduct.setProdPrice(prodPrice);
+            newProduct.setProdQuantity(prodQuantity);
+
+            String status = productService.addProductToInventory(newProduct);
+            pw.println("<script>document.getElementById('message').innerHTML='" + status + "'</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
+            rd.include(request, response);
+        } else {
+            pw.println("<script>document.getElementById('message').innerHTML='Invalid action!'</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
+            rd.include(request, response);
+        }
+    }
+}
+
+
+To incorporate the requested functionality, I will modify the existing code by adding methods to support new product lines and product additions. The changes involve creating functions to add new product lines to the inventory and insert new products into those lines. Additionally, I'll provide an endpoint that allows us to interact with these functionalities.
+
+Enhancements Overview
+Add New Product Line: A method to create a new product line category.
+Add New Products: A method to add products to an existing or newly created product line.
+Suggested Code Enhancements
+Update ProductServiceImpl with New Methods:
+
+addProductLine: Adds a new product line to the inventory.
+addProductToInventory: Adds a new product to an existing product line.
+Create a New Servlet: To handle requests for adding product lines and products.
+
+Updated ProductServiceImpl
+Add these new methods to ProductServiceImpl for handling product lines and new product additions.
+
+java
+Copy code
+package com.shashi.service.impl;
+
+import com.shashi.beans.ProductBean;
+import java.util.List;
+
+public class ProductServiceImpl {
+
+    // Method to add a new product line
+    public String addProductLine(String productLineName) {
+        // Logic to add a product line to the inventory
+        // Assuming a method saveProductLine() that adds the product line to the database
+        boolean isAdded = saveProductLine(productLineName);
+        return isAdded ? "Product line added successfully!" : "Failed to add product line.";
+    }
+
+    // Method to add a new product to the inventory under a specific product line
+    public String addProductToInventory(ProductBean product) {
+        // Logic to add the product to an existing product line
+        // Assuming saveProduct() saves the product in the database
+        boolean isAdded = saveProduct(product);
+        return isAdded ? "Product added successfully to inventory!" : "Failed to add product.";
+    }
+
+    private boolean saveProductLine(String productLineName) {
+        // Implement the code to save the product line in the database
+        return true;
+    }
+
+    private boolean saveProduct(ProductBean product) {
+        // Implement the code to save the product in the database
+        return true;
+    }
+}
+New Servlet ProductManagementServlet
+This servlet will handle requests to add new product lines and products.
+
+java
+Copy code
+package com.shashi.srv;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.shashi.beans.ProductBean;
+import com.shashi.service.impl.ProductServiceImpl;
+
+@WebServlet("/ProductManagement")
+public class ProductManagementServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private ProductServiceImpl productService = new ProductServiceImpl();
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        PrintWriter pw = response.getWriter();
+        response.setContentType("text/html");
+
+        if ("addProductLine".equalsIgnoreCase(action)) {
+            String productLineName = request.getParameter("productLineName");
+            String status = productService.addProductLine(productLineName);
+            pw.println("<script>document.getElementById('message').innerHTML='" + status + "'</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
+            rd.include(request, response);
+
+        } else if ("addProduct".equalsIgnoreCase(action)) {
+            String prodName = request.getParameter("prodName");
+            String prodLine = request.getParameter("prodLine");
+            double prodPrice = Double.parseDouble(request.getParameter("prodPrice"));
+            int prodQuantity = Integer.parseInt(request.getParameter("prodQuantity"));
+
+            ProductBean newProduct = new ProductBean();
+            newProduct.setProdName(prodName);
+            newProduct.setProdLine(prodLine);
+            newProduct.setProdPrice(prodPrice);
+            newProduct.setProdQuantity(prodQuantity);
+
+            String status = productService.addProductToInventory(newProduct);
+            pw.println("<script>document.getElementById('message').innerHTML='" + status + "'</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
+            rd.include(request, response);
+        } else {
+            pw.println("<script>document.getElementById('message').innerHTML='Invalid action!'</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("adminHome.jsp");
+            rd.include(request, response);
+        }
+    }
+}
+Adding JSP Forms for Product Line and Product Addition
+On the admin page (e.g., adminHome.jsp), add forms to allow adding a new product line and products.
+
+<h3>Add New Product Line</h3>
+<form action="ProductManagement" method="post">
+    <input type="hidden" name="action" value="addProductLine">
+    <label for="productLineName">Product Line Name:</label>
+    <input type="text" name="productLineName" required>
+    <button type="submit">Add Product Line</button>
+</form>
+
+<h3>Add New Product</h3>
+<form action="ProductManagement" method="post">
+    <input type="hidden" name="action" value="addProduct">
+    <label for="prodName">Product Name:</label>
+    <input type="text" name="prodName" required>
+    <label for="prodLine">Product Line:</label>
+    <input type="text" name="prodLine" required>
+    <label for="prodPrice">Price:</label>
+    <input type="number" name="prodPrice" step="0.01" required>
+    <label for="prodQuantity">Quantity:</label>
+    <input type="number" name="prodQuantity" required>
+    <button type="submit">Add Product</button>
+</form>
+
+<div id="message"></div>
+
+These changes provide:
+An admin-facing UI to add product lines and products.
+New methods in ProductServiceImpl for handling these tasks.
+A servlet (ProductManagementServlet) will be used to manage the new requests.
+This setup enables administrators to quickly manage product promotions and inventory additions as Thanksgiving approaches.
