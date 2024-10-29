@@ -203,3 +203,5 @@ Discount Logic:
 applyDiscount(double totalAmount, String discountCode)
 : This helper method applies a discount to the total amount based on the discount code. You can expand this method to include more complex discount logic as needed.
 These enhancements will allow the system to manage new product lines and apply promotional discounts effectively during Thanksgiving.
+
+
